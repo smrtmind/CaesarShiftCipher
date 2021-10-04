@@ -12,262 +12,130 @@ namespace CaesarShiftCipher
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Black;
 
-            char[] englishUpper = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-            char[] englishLower = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+            string exitTheProgram = string.Empty;
+            int encryptOrDecrypt = 0;
+            int complexity = 0;
 
-            int ENlength = englishLower.Length;
-
-            char[] russianUpper = { 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я' };
-            char[] russianLower = { 'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я' };
-
-            int RUlength = russianLower.Length;
-
-            int encryptOrDecrypt = 0, enOrRu = 0, level = 0;
-            string yesOrNo = string.Empty;
-
-            while (yesOrNo != "n".ToLower())
+            while (exitTheProgram.ToLower() != "y")
             {
-                Console.Write("What do you want to do?");
-                Console.WriteLine("[1] encrypt".PadLeft(15, ' '));
-                Console.WriteLine("[2] decrypt\n".PadLeft(39, ' '));
+                string[] text = new string[3];
 
-                do
+                Console.Clear();
+                Print("[1] ENCRYPTOR\t", ConsoleColor.DarkMagenta);
+                Print("[2] DECRYPTOR\t__________\n", ConsoleColor.DarkBlue);
+
+                encryptOrDecrypt = 0;
+                while (encryptOrDecrypt != 1 && encryptOrDecrypt != 2)
                 {
-                    Console.Write("input: ".PadLeft(34, ' '));
+                    Print("| ".PadLeft(33, ' '), ConsoleColor.DarkBlue);
+                    Print("select: ");
                     int.TryParse(Console.ReadLine(), out encryptOrDecrypt);
-
-                    if (encryptOrDecrypt == 1 || encryptOrDecrypt == 2) break;
-                    else Console.WriteLine("incorrect".PadLeft(43));
                 }
-                while (encryptOrDecrypt != 1 || encryptOrDecrypt != 2);
-
-                Console.Write("\nChoose the language:");
-                Console.WriteLine("[1] english".PadLeft(18, ' '));
-                Console.WriteLine("[2] russian\n".PadLeft(39, ' '));
-
-                do
-                {
-                    Console.Write("input: ".PadLeft(34, ' '));
-                    int.TryParse(Console.ReadLine(), out enOrRu);
-
-                    if (enOrRu == 1 || enOrRu == 2) break;
-                    else Console.WriteLine("incorrect".PadLeft(43));
-                }
-                while (enOrRu != 1 || enOrRu != 2);
+                Console.WriteLine();
 
                 if (encryptOrDecrypt == 1)
                 {
-                    Console.WriteLine("\nEnter the original text: ");
-                    string input = Console.ReadLine();
-                    char[] letters = input.ToCharArray();
-
-                    do
-                    {
-                        Console.Write($"{Environment.NewLine}Enter the level of encryption (1-25): ");
-                        int.TryParse(Console.ReadLine(), out level);
-
-                        if (level <= 25 && level != 0) break;
-                        else Console.Write("incorrect".PadLeft(47));
-                    }
-                    while (level > 25 || level == 0);
-
-                    if (enOrRu == 1)
-                    {
-                        Encryptor(level, ENlength, letters, englishUpper, englishLower);
-
-                        GetLoading("".PadLeft(115, '|'));
-                        Console.WriteLine();
-
-                        Console.WriteLine($"{Environment.NewLine}Result (encryption level {level}):");
-
-                        foreach (var letter in letters)
-                        {
-                            Console.Write(letter);
-                        }
-
-                        Console.WriteLine();
-                    }
-
-                    if (enOrRu == 2)
-                    {
-                        Encryptor(level, RUlength, letters, russianUpper, russianLower);
-
-                        GetLoading("".PadLeft(115, '|'));
-                        Console.WriteLine();
-
-                        Console.WriteLine($"{Environment.NewLine}Result (encryption level {level}):");
-
-                        foreach (var letter in letters)
-                        {
-                            Console.Write(letter);
-                        }
-
-                        Console.WriteLine();
-                    }
+                    text[0] = "Enter the original text:";
+                    text[1] = "Level of encryption (1-25):";
+                    text[2] = $"Encrypted:";
                 }
 
                 if (encryptOrDecrypt == 2)
                 {
-                    Console.WriteLine("\nEnter the encrypted text: ");
-                    string input = Console.ReadLine();
-                    char[] letters = input.ToCharArray();
-
-                    do
-                    {
-                        Console.Write($"{Environment.NewLine}Enter the level of decryption (1-25): ");
-                        int.TryParse(Console.ReadLine(), out level);
-
-                        if (level <= 25 && level != 0) break;
-                        else Console.Write("incorrect".PadLeft(47));
-                    }
-                    while (level > 25 || level == 0);
-
-                    if (enOrRu == 1)
-                    {
-                        Decryptor(level, ENlength, letters, englishUpper, englishLower);
-
-                        GetLoading("".PadLeft(115, '|'));
-                        Console.WriteLine();
-
-                        Console.WriteLine($"{Environment.NewLine}Result of decryption:");
-
-                        foreach (var letter in letters)
-                        {
-                            Console.Write(letter);
-                        }
-
-                        Console.WriteLine();
-                    }
-
-                    if (enOrRu == 2)
-                    {
-                        Decryptor(level, RUlength, letters, russianUpper, russianLower);
-
-                        GetLoading("".PadLeft(115, '|'));
-                        Console.WriteLine();
-
-                        Console.WriteLine($"{Environment.NewLine}Result of decryption:");
-
-                        foreach (var letter in letters)
-                        {
-                            Console.Write(letter);
-                        }
-
-                        Console.WriteLine();
-                    }
+                    text[0] = "Enter the encrypted text:";
+                    text[1] = "Level of decryption (1-25):";
+                    text[2] = "Decrypted:";
                 }
 
-                do
+                string input = string.Empty;
+                while (input.Length == 0)
                 {
-                    Console.Write("\nDo you want to continue using the program? [y] / [n]: ");
-                    yesOrNo = Console.ReadLine();
-
-                    if (yesOrNo.ToLower() == "y")
-                    {
-                        Console.Clear();
-                        break;
-                    }
-
-                    if (yesOrNo.ToLower() == "n") break;
-
-                    else Console.Write("incorrect".PadLeft(63));
+                    Print($"{text[0]} \n", ConsoleColor.DarkMagenta);
+                    input = Console.ReadLine();
                 }
-                while (yesOrNo.ToLower() != "n" || yesOrNo.ToLower() != "y");
+                
+                char[] userInput = input.ToLower().ToCharArray();
+
+                complexity = 0;
+                while (complexity > 25 || complexity == 0)
+                {
+                    Print($"\n{text[1]} ", ConsoleColor.DarkBlue);
+                    int.TryParse(Console.ReadLine(), out complexity);
+
+                    if (complexity <= 25 && complexity != 0) break;
+                }
+
+                if (encryptOrDecrypt == 1)
+                    Algorithm(complexity, userInput, enc: true);
+                if (encryptOrDecrypt == 2)
+                    Algorithm(complexity, userInput, dec: true);
+
+                Print($"\n{text[2]}\n", ConsoleColor.DarkMagenta);
+
+                foreach (var letter in userInput)
+                    Console.Write(letter);
+                Console.WriteLine();
+
+                exitTheProgram = string.Empty;
+                while (exitTheProgram.ToLower() != "n" && exitTheProgram.ToLower() != "y")
+                {
+                    Console.Write("\n\nExit the program? [y] / [n]: ");
+                    exitTheProgram = Console.ReadLine();
+                }
             }
         }
-        static void Encryptor(int level, int alphabetLength, char[] letters, char[] letterUpper, char[] lettersLower)
+        static void Algorithm(int complexity, char[] userInput, bool enc = false, bool dec = false)
         {
-            char[] symbols = { '.', ',', '?', '-', '/', '\\', '_', '!', ' ', '+', '*', '=', '&', '%', '#', '№', '@', ';', ':', '>', '<', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+            char[] symbols = GetAlphabet();
 
             int index = 0;
 
-            for (int i = 0; i < letters.Length; i++)
+            for (int i = 0; i < userInput.Length; i++)
             {
-                for (int k = 0; k < alphabetLength; k++)
+                for (int j = 0; j < symbols.Length; j++)
                 {
-                    if (letters[i] == letterUpper[k] || letters[i] == lettersLower[k])
-                        index = k + level;
+                    if (enc)
+                    {
+                        if (userInput[i] == symbols[j])
+                            index = j + complexity;
+                    }
+
+                    if (dec)
+                    {
+                        if (userInput[i] == symbols[j])
+                            index = j + (symbols.Length - complexity);
+                    }
                 }
 
-                if (index >= alphabetLength)
+                if (index >= symbols.Length)
                 {
-                    index -= alphabetLength;
-                    letters[i] = lettersLower[index];
+                    index -= symbols.Length;
+                    userInput[i] = symbols[index];
                 }
 
-                else if (letters[i] == ' ') letters[i] = ' ';
-                else if (letters[i] == '.') letters[i] = '.';
-                else if (letters[i] == ',') letters[i] = ',';
-                else if (letters[i] == '?') letters[i] = '?';
-                else if (letters[i] == '!') letters[i] = '!';
-                else if (letters[i] == '-') letters[i] = '-';
-                else if (letters[i] == '\'') letters[i] = '\'';
-                else if (letters[i] == '\"') letters[i] = '\"';
-                else if (letters[i] == '1') letters[i] = '1';
-                else if (letters[i] == '2') letters[i] = '2';
-                else if (letters[i] == '3') letters[i] = '3';
-                else if (letters[i] == '4') letters[i] = '4';
-                else if (letters[i] == '5') letters[i] = '5';
-                else if (letters[i] == '6') letters[i] = '6';
-                else if (letters[i] == '7') letters[i] = '7';
-                else if (letters[i] == '8') letters[i] = '8';
-                else if (letters[i] == '9') letters[i] = '9';
-                else if (letters[i] == '0') letters[i] = '0';
-
-                else letters[i] = lettersLower[index];
+                else userInput[i] = symbols[index];
             }
         }
-        static void Decryptor(int level, int alphabetLength, char[] letters, char[] letterUpper, char[] lettersLower)
+
+        public static char[] GetAlphabet()
         {
-            int index = 0;
+            char[] symbols = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+                                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                                'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 
+                                'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 
+                                'ъ', 'ы', 'ь', 'э', 'ю', 'я', 
+                                '.', ',', '?', '-', '/', '_', '!', ' ', '~', '+', '*', '=', '&', 
+                                '%', '#', '№', '@', ';', ':', '>', '<', '\'', '\"', '\\',
+                                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
-            for (int i = 0; i < letters.Length; i++)
-            {
-                for (int k = 0; k < alphabetLength; k++)
-                {
-                    if (letters[i] == letterUpper[k] || letters[i] == lettersLower[k])
-                        index = k + (alphabetLength - level);
-                }
-
-                if (index >= alphabetLength)
-                {
-                    index -= alphabetLength;
-                    letters[i] = lettersLower[index];
-                }
-
-                else if (letters[i] == ' ') letters[i] = ' ';
-                else if (letters[i] == '.') letters[i] = '.';
-                else if (letters[i] == ',') letters[i] = ',';
-                else if (letters[i] == '?') letters[i] = '?';
-                else if (letters[i] == '!') letters[i] = '!';
-                else if (letters[i] == '-') letters[i] = '-';
-                else if (letters[i] == '\'') letters[i] = '\'';
-                else if (letters[i] == '\"') letters[i] = '\"';
-                else if (letters[i] == '1') letters[i] = '1';
-                else if (letters[i] == '2') letters[i] = '2';
-                else if (letters[i] == '3') letters[i] = '3';
-                else if (letters[i] == '4') letters[i] = '4';
-                else if (letters[i] == '5') letters[i] = '5';
-                else if (letters[i] == '6') letters[i] = '6';
-                else if (letters[i] == '7') letters[i] = '7';
-                else if (letters[i] == '8') letters[i] = '8';
-                else if (letters[i] == '9') letters[i] = '9';
-                else if (letters[i] == '0') letters[i] = '0';
-
-                else letters[i] = lettersLower[index];
-            }
+            return symbols;
         }
-        static string GetLoading(string randomPhrase)
+
+        public static void Print(string text, ConsoleColor color = ConsoleColor.Black)
         {
-            char[] letters = randomPhrase.ToCharArray();
-
-            foreach (char arr in letters)
-            {
-                Console.Write(arr);
-                Thread.Sleep(5);
-            }
-
-            return randomPhrase;
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ForegroundColor = ConsoleColor.Black;
         }
     }
 }
