@@ -1,0 +1,16 @@
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\bin\Debug\net5.0\CaesarShiftCipher.exe
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\bin\Debug\net5.0\CaesarShiftCipher.deps.json
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\bin\Debug\net5.0\CaesarShiftCipher.runtimeconfig.json
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\bin\Debug\net5.0\CaesarShiftCipher.runtimeconfig.dev.json
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\bin\Debug\net5.0\CaesarShiftCipher.dll
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\bin\Debug\net5.0\ref\CaesarShiftCipher.dll
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\bin\Debug\net5.0\CaesarShiftCipher.pdb
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.GeneratedMSBuildEditorConfig.editorconfig
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.AssemblyInfoInputs.cache
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.AssemblyInfo.cs
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.csproj.CoreCompileInputs.cache
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.dll
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\obj\Debug\net5.0\ref\CaesarShiftCipher.dll
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.pdb
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.genruntimeconfig.cache
+D:\OneDrive\Code\C#\MyProjects\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.csproj.AssemblyReference.cache
