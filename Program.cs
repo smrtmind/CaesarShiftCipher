@@ -10,6 +10,17 @@ namespace CaesarShiftCipher
 
         static void Main(string[] args)
         {
+            //char[] randomArray = GetRandomArray();
+
+            //Array.Sort(randomArray);
+            //foreach (var item in randomArray)
+            //{
+            //    Console.Write(item + " ");
+            //}
+
+            //Console.ReadLine();
+
+
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Black;
@@ -19,7 +30,7 @@ namespace CaesarShiftCipher
             while (exitTheProgram.ToLower() != "y")
             {
                 decimal complexity = 0;
-                decimal code = 098816871917;
+                const decimal code = 098816871917;
                 string input = string.Empty;
                 string output = string.Empty;
 
@@ -324,24 +335,22 @@ namespace CaesarShiftCipher
         public static char[] GetRandomArray()
         {
             char[] sortedArray = GetSortedArray();
-            char[] randomArray = new char[sortedArray.Length];
-            int[] randomArrayIndexes = new int[randomArray.Length];
+            int[] randomArrayIndexes = new int[sortedArray.Length];
 
-            for (int i = 0; i < sortedArray.Length; i++)
+            for (int i = sortedArray.Length - 1; i >= 1; i--)
             {
-                int temp = random.Next(0, 161);
+                int rand = random.Next(i + 1);
 
-                if (randomArray[i] == sortedArray[temp]) continue;
-                else
-                {
-                    randomArray[i] = sortedArray[temp];
-                    randomArrayIndexes[i] = temp;
-                }
+                char temp = sortedArray[rand];
+                sortedArray[rand] = sortedArray[i];
+                sortedArray[i] = temp;
+
+                randomArrayIndexes[i] = rand;
             }
 
             indexes = new RandomArrayIndexes(randomArrayIndexes);
 
-            return randomArray;
+            return sortedArray;
         }
 
         public static void Print(string text, ConsoleColor color = ConsoleColor.Black)
