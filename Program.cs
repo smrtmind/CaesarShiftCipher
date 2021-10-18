@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Threading;
 
 namespace CaesarShiftCipher
 {
@@ -69,7 +67,7 @@ namespace CaesarShiftCipher
 
                     Print($"\nDecrypted\n", ConsoleColor.DarkMagenta);
                     Print($"{Algorithm(complexity, input, decode: true)}\n\n");
-                }           
+                }
 
                 exitTheProgram = string.Empty;
                 while (exitTheProgram.ToLower() != "n" && exitTheProgram.ToLower() != "y")
@@ -89,16 +87,10 @@ namespace CaesarShiftCipher
             {
                 for (int j = 0; j < symbols.Length; j++)
                 {
-                    if (encode)
+                    if (userInput[i] == symbols[j])
                     {
-                        if (userInput[i] == symbols[j])
-                            index = j + (int)complexity;
-                    }
-
-                    if (decode)
-                    {
-                        if (userInput[i] == symbols[j])
-                            index = j + (symbols.Length - (int)complexity);
+                        if (encode) index = j + (int)complexity;
+                        if (decode) index = j + (symbols.Length - (int)complexity);
                     }
                 }
 
@@ -140,118 +132,5 @@ namespace CaesarShiftCipher
             Console.Write(text);
             Console.ForegroundColor = ConsoleColor.Black;
         }
-
-        /*
-         * 
-         static string Encode(decimal complexity, char[] userInput)
-         {
-             char[] randomArray = GetRandomArray();
-        
-             int index = 0;
-        
-             for (int i = 0; i < userInput.Length; i++)
-             {
-                 for (int j = 0; j < randomArray.Length; j++)
-                 {
-                     if (userInput[i] == randomArray[j])
-                         index = j + (int)complexity;
-                 }
-        
-                 if (index >= randomArray.Length)
-                 {
-                     index -= randomArray.Length;
-                     userInput[i] = randomArray[index];
-                 }
-        
-                 else userInput[i] = randomArray[index];
-             }
-        
-             return new string(userInput);
-         }
-
-         static string Decode(decimal complexity, string subsequence, char[] userInput)
-         {
-             char[] sortedArray = GetSortedArray();
-             string[] sub = subsequence.Split("");
-             int[] indexes = new int[sub.Length];
-        
-             for (int i = 0; i < sub.Length; i++)
-                 indexes[i] = Convert.ToInt32(sub[i]);
-        
-             char[] randomArray = new char[sortedArray.Length];
-             for (int i = 0; i < randomArray.Length; i++)
-                 randomArray[i] = sortedArray[indexes[i]];
-        
-             int index = 0;
-        
-             for (int i = 0; i < userInput.Length; i++)
-             {
-                 for (int j = 0; j < randomArray.Length; j++)
-                 {
-                     if (userInput[i] == randomArray[j])
-                         index = j + (randomArray.Length - (int)complexity);
-                 }
-        
-                 if (index >= randomArray.Length)
-                 {
-                     index -= randomArray.Length;
-                     userInput[i] = randomArray[index];
-                 }
-        
-                 else userInput[i] = randomArray[index];
-             }
-        
-             return new string(userInput);
-         }
-        
-         public static char[] GetSortedArray()
-         {
-             //161 symbols
-             char[] sortedArray = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-                                    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-                                    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-                                    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-                                    'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л',
-                                    'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш',
-                                    'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я',
-                                    'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л',
-                                    'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш',
-                                    'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я',
-                                    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=',
-                                    '+', '?', '<', '>', ':', ';', '.', ',', '|', '/', '~', '{', '}',
-                                    '[', ']', '№', ' ', '\'', '\"','\\',
-                                    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        
-             return sortedArray;
-         }
-        
-         public static char[] GetRandomArray()
-         {
-             char[] sortedArray = GetSortedArray();
-             int[] randomArrayIndexes = new int[sortedArray.Length];
-        
-             for (int i = sortedArray.Length - 1; i >= 1; i--)
-             {
-                 int rand = random.Next(i + 1);
-        
-                 char temp = sortedArray[rand];
-                 sortedArray[rand] = sortedArray[i];
-                 sortedArray[i] = temp;
-        
-                 randomArrayIndexes[i] = rand;
-             }
-        
-             indexes = new RandomArrayIndexes(randomArrayIndexes);
-        
-             return sortedArray;
-         }
-        
-         public static void Print(string text, ConsoleColor color = ConsoleColor.Black)
-         {
-             Console.ForegroundColor = color;
-             Console.Write(text);
-             Console.ForegroundColor = ConsoleColor.Black;
-         }
-         */
     }
 }
