@@ -5,6 +5,7 @@ namespace CaesarShiftCipher
     class Program
     {
         static Random random = new Random();
+        static char[] symbols = GetSymbolsArray();
 
         static void Main(string[] args)
         {
@@ -17,6 +18,7 @@ namespace CaesarShiftCipher
             while (exitTheProgram.ToLower() != "y")
             {
                 decimal complexity = 0;
+                //random code to generate some kind of unic key
                 const decimal code = 098816871917;
                 string input = string.Empty;
 
@@ -33,6 +35,7 @@ namespace CaesarShiftCipher
                 }
                 Console.WriteLine();
 
+                //if you want to encrypt
                 if (encryptOrDecrypt == 1)
                 {
                     while (input.Length == 0)
@@ -41,32 +44,35 @@ namespace CaesarShiftCipher
                         input = Console.ReadLine();
                     }
 
-                    complexity = random.Next(1, 161);
-                    Print($"\nKEY: {complexity * code}", ConsoleColor.DarkBlue);
+                    complexity = random.Next(1, symbols.Length);
+                    Print($"\nKEY: ", ConsoleColor.DarkMagenta);
+                    //generating key, to decode your message
+                    Print($"{complexity * code}\n");
                     Print($"\nEncrypted\n", ConsoleColor.DarkMagenta);
                     Print($"{Algorithm(complexity, input, encode: true)}\n\n");
                 }
 
-                if (encryptOrDecrypt == 2)
+                //else decrypt
+                else
                 {
                     while (input.Length == 0)
                     {
-                        Print($"Enter the encrypted text:\n", ConsoleColor.DarkMagenta);
+                        Print($"Enter the encrypted text:\n", ConsoleColor.DarkBlue);
                         input = Console.ReadLine();
                     }
 
                     Console.WriteLine();
-                    while (complexity > 161 || complexity == 0)
+                    while (complexity > symbols.Length || complexity == 0)
                     {
                         Print($"KEY: ", ConsoleColor.DarkBlue);
                         decimal.TryParse(Console.ReadLine(), out complexity);
                         complexity /= code;
 
-                        if (complexity <= 161 && complexity != 0) break;
+                        if (complexity <= symbols.Length && complexity != 0) break;
                     }
 
-                    Print($"\nDecrypted\n", ConsoleColor.DarkMagenta);
-                    Print($"{Algorithm(complexity, input, decode: true)}\n\n");
+                    Print($"\nDecrypted\n", ConsoleColor.DarkBlue);
+                    Print($"{Algorithm(complexity, input)}\n\n");
                 }
 
                 exitTheProgram = string.Empty;
@@ -77,10 +83,9 @@ namespace CaesarShiftCipher
                 }
             }
         }
-        static string Algorithm(decimal complexity, string input, bool encode = false, bool decode = false)
+        static string Algorithm(decimal complexity, string input, bool encode = false)
         {
             char[] userInput = input.ToCharArray();
-            char[] symbols = GetSortedArrayOfSymbols();
             int index = 0;
 
             for (int i = 0; i < userInput.Length; i++)
@@ -89,8 +94,10 @@ namespace CaesarShiftCipher
                 {
                     if (userInput[i] == symbols[j])
                     {
+                        //encoding
                         if (encode) index = j + (int)complexity;
-                        if (decode) index = j + (symbols.Length - (int)complexity);
+                        //decoding
+                        else index = j + (symbols.Length - (int)complexity);
                     }
                 }
 
@@ -106,7 +113,7 @@ namespace CaesarShiftCipher
             return new string(userInput);
         }
 
-        public static char[] GetSortedArrayOfSymbols()
+        public static char[] GetSymbolsArray()
         {
             char[] symbols = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
