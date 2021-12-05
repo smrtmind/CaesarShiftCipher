@@ -11,7 +11,7 @@ namespace CaesarShiftCipher
         public static string Use(string cipher, decimal code, string input)
         {
             char[] userInput = input.ToCharArray();
-            string[] cipherArray = cipher.Split(' ');
+            string[] cipherArray = cipher.Split('|');
             int[] indexes = new int[cipherArray.Length - 1];
 
             for (int i = 0; i < indexes.Length; i++)

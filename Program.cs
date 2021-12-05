@@ -16,12 +16,13 @@ namespace CaesarShiftCipher
 
             string exitTheProgram = string.Empty;
 
-            while (exitTheProgram.ToLower() != "y")
+            while (exitTheProgram != "y")
             {
                 int complexity = 0;
                 //random code to generate some kind of unic key
                 const decimal code = 091619888717;
                 string input = string.Empty;
+                string cipher = string.Empty;
 
                 Console.Clear();
                 Print("[1] ENCRYPTOR\t", ConsoleColor.DarkMagenta);
@@ -50,41 +51,33 @@ namespace CaesarShiftCipher
                     Print($"{Encoder.Use(complexity, input)}\n\n");
                     Print($"KEY: ", ConsoleColor.DarkMagenta);
                     //generating key, to decode your message
-                    //Source.GetCipher(complexity);
-                    Print($"{Source.GetIndexes()} {complexity * code}\n\n");
+                    Print($"{Source.GetIndexes()}|{complexity * code}\n\n");
                 }
 
                 //else decrypt
                 else
                 {
-                    string cipher = string.Empty;
-
                     while (input.Length == 0)
                     {
                         Print($"Enter the encrypted text:\n", ConsoleColor.DarkBlue);
                         input = Console.ReadLine();
                     }
 
-                    Console.WriteLine();
-
-                        Print($"KEY: ", ConsoleColor.DarkBlue);
+                    while (cipher.Length == 0)
+                    {
+                        Print($"\nKEY: ", ConsoleColor.DarkBlue);
                         cipher = Console.ReadLine();
-
-
-                        //decimal.TryParse(Console.ReadLine(), out complexity);
-                        //complexity /= code;
-
-
-
+                    }
+                    
                     Print($"\nDecrypted\n", ConsoleColor.DarkBlue);
                     Print($"{Decoder.Use(cipher, code, input)}\n\n");
                 }
 
                 exitTheProgram = string.Empty;
-                while (exitTheProgram.ToLower() != "n" && exitTheProgram.ToLower() != "y")
+                while (exitTheProgram != "n" && exitTheProgram != "y")
                 {
                     Print("Exit the program? [y] / [n]: ", ConsoleColor.DarkGray);
-                    exitTheProgram = Console.ReadLine();
+                    exitTheProgram = Console.ReadLine().ToLower();
                 }
             }
         }

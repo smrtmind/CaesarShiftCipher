@@ -8,7 +8,6 @@ namespace CaesarShiftCipher
     {
         private static Random random = new Random();
         public static List<int> indexes;
-        //public static int[] cipher = new int[GetSymbolsLength() + 1];
 
         public static List<char> GetSymbolsArray()
         {
@@ -60,19 +59,7 @@ namespace CaesarShiftCipher
             return randomSymbols;
         }
 
-        public static string GetIndexes() => String.Join(" ", indexes.Select(p => p.ToString()).ToArray());
-
-        //public static void GetCipher(int complexity)
-        //{
-        //    for (int i = 0; i < cipher.Length - 1; i++)
-        //        cipher[i] = indexes[i];
-
-        //    cipher[cipher.Length - 1] = complexity;
-
-        //    for (int i = 0; i < cipher.Length - 1; i++)
-        //        Program.Print($"{cipher[i]} ");
-        //    Program.Print("\n\n");
-        //}
+        public static string GetIndexes() => String.Join("|", indexes.Select(p => p.ToString()).ToArray());
 
         public static List<char> GetOriginalArray(int[] indexes)
         {
