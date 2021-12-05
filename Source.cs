@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaesarShiftCipher
 {
     public class Source
     {
         private static Random random = new Random();
-        public static List<int> indexes = new List<int>();
+        public static List<int> indexes;
+        //public static int[] cipher = new int[GetSymbolsLength() + 1];
 
-        private static List<char> GetSymbolsArray()
+        public static List<char> GetSymbolsArray()
         {
             List<char> symbols = new List<char>
             {
@@ -38,6 +37,7 @@ namespace CaesarShiftCipher
 
         public static List<char> GetRandomArray()
         {
+            indexes = new List<int>();
             List<char> symbols = GetSymbolsArray();
             List<char> randomSymbols = new List<char>();
 
@@ -62,9 +62,27 @@ namespace CaesarShiftCipher
 
         public static string GetIndexes() => String.Join(" ", indexes.Select(p => p.ToString()).ToArray());
 
-        //public static List<char> GetOriginalArray()
+        //public static void GetCipher(int complexity)
         //{
-        //    return;
+        //    for (int i = 0; i < cipher.Length - 1; i++)
+        //        cipher[i] = indexes[i];
+
+        //    cipher[cipher.Length - 1] = complexity;
+
+        //    for (int i = 0; i < cipher.Length - 1; i++)
+        //        Program.Print($"{cipher[i]} ");
+        //    Program.Print("\n\n");
         //}
+
+        public static List<char> GetOriginalArray(int[] indexes)
+        {
+            List<char> symbols = GetSymbolsArray();
+            List<char> randomSymbols = new List<char>();
+
+            for (int i = 0; i < indexes.Length; i++)
+                randomSymbols.Add(symbols[indexes[i]]);
+
+            return randomSymbols;
+        }
     }
 }

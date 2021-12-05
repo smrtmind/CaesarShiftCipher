@@ -18,9 +18,9 @@ namespace CaesarShiftCipher
 
             while (exitTheProgram.ToLower() != "y")
             {
-                decimal complexity = 0;
+                int complexity = 0;
                 //random code to generate some kind of unic key
-                const decimal code = 098816871917;
+                const decimal code = 091619888717;
                 string input = string.Empty;
 
                 Console.Clear();
@@ -47,15 +47,18 @@ namespace CaesarShiftCipher
 
                     complexity = random.Next(1, symbolsLength);
                     Print($"\nEncrypted\n", ConsoleColor.DarkMagenta);
-                    Print($"{Algorithm(complexity, input, encode: true)}\n\n");
+                    Print($"{Encoder.Use(complexity, input)}\n\n");
                     Print($"KEY: ", ConsoleColor.DarkMagenta);
                     //generating key, to decode your message
-                    Print($"{complexity * code} / {Source.GetIndexes()}\n\n");
+                    //Source.GetCipher(complexity);
+                    Print($"{Source.GetIndexes()} {complexity * code}\n\n");
                 }
 
                 //else decrypt
                 else
                 {
+                    string cipher = string.Empty;
+
                     while (input.Length == 0)
                     {
                         Print($"Enter the encrypted text:\n", ConsoleColor.DarkBlue);
@@ -63,17 +66,18 @@ namespace CaesarShiftCipher
                     }
 
                     Console.WriteLine();
-                    while (complexity > symbolsLength || complexity == 0)
-                    {
-                        Print($"KEY: ", ConsoleColor.DarkBlue);
-                        decimal.TryParse(Console.ReadLine(), out complexity);
-                        complexity /= code;
 
-                        if (complexity <= symbolsLength && complexity != 0) break;
-                    }
+                        Print($"KEY: ", ConsoleColor.DarkBlue);
+                        cipher = Console.ReadLine();
+
+
+                        //decimal.TryParse(Console.ReadLine(), out complexity);
+                        //complexity /= code;
+
+
 
                     Print($"\nDecrypted\n", ConsoleColor.DarkBlue);
-                    Print($"{Algorithm(complexity, input)}\n\n");
+                    Print($"{Decoder.Use(cipher, code, input)}\n\n");
                 }
 
                 exitTheProgram = string.Empty;
@@ -83,36 +87,6 @@ namespace CaesarShiftCipher
                     exitTheProgram = Console.ReadLine();
                 }
             }
-        }
-        static string Algorithm(decimal complexity, string input, bool encode = false)
-        {
-            char[] userInput = input.ToCharArray();
-            List<char> symbols = Source.GetRandomArray();
-            int index = 0;
-
-            for (int i = 0; i < userInput.Length; i++)
-            {
-                for (int j = 0; j < symbolsLength; j++)
-                {
-                    if (userInput[i] == symbols[j])
-                    {
-                        //encoding
-                        if (encode) index = j + (int)complexity;
-                        //decoding
-                        else index = j + (symbolsLength - (int)complexity);
-                    }
-                }
-
-                if (index >= symbolsLength)
-                {
-                    index -= symbolsLength;
-                    userInput[i] = symbols[index];
-                }
-
-                else userInput[i] = symbols[index];
-            }
-
-            return new string(userInput);
         }
 
         public static void Print(string text, ConsoleColor color = ConsoleColor.Black)
