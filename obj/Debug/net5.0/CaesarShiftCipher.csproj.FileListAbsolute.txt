@@ -61,3 +61,4 @@ C:\docs\code\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.dll
 C:\docs\code\CaesarShiftCipher\obj\Debug\net5.0\ref\CaesarShiftCipher.dll
 C:\docs\code\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.pdb
 C:\docs\code\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.genruntimeconfig.cache
+C:\docs\code\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.csproj.AssemblyReference.cache
