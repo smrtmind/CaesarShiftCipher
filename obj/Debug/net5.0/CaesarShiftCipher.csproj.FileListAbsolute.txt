@@ -53,7 +53,6 @@ C:\docs\code\CaesarShiftCipher\bin\Debug\net5.0\CaesarShiftCipher.runtimeconfig.
 C:\docs\code\CaesarShiftCipher\bin\Debug\net5.0\CaesarShiftCipher.dll
 C:\docs\code\CaesarShiftCipher\bin\Debug\net5.0\ref\CaesarShiftCipher.dll
 C:\docs\code\CaesarShiftCipher\bin\Debug\net5.0\CaesarShiftCipher.pdb
-C:\docs\code\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.csproj.AssemblyReference.cache
 C:\docs\code\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.GeneratedMSBuildEditorConfig.editorconfig
 C:\docs\code\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.AssemblyInfoInputs.cache
 C:\docs\code\CaesarShiftCipher\obj\Debug\net5.0\CaesarShiftCipher.AssemblyInfo.cs
