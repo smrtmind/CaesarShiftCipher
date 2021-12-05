@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CaesarShiftCipher
 {
     class Program
     {
         static Random random = new Random();
-        static char[] symbols = GetSymbolsArray();
+        static List<char> symbols = GetSymbolsArray();
 
         static void Main(string[] args)
         {
@@ -44,7 +45,7 @@ namespace CaesarShiftCipher
                         input = Console.ReadLine();
                     }
 
-                    complexity = random.Next(1, symbols.Length);
+                    complexity = random.Next(1, symbols.Count);
                     Print($"\nKEY: ", ConsoleColor.DarkMagenta);
                     //generating key, to decode your message
                     Print($"{complexity * code}\n");
@@ -62,13 +63,13 @@ namespace CaesarShiftCipher
                     }
 
                     Console.WriteLine();
-                    while (complexity > symbols.Length || complexity == 0)
+                    while (complexity > symbols.Count || complexity == 0)
                     {
                         Print($"KEY: ", ConsoleColor.DarkBlue);
                         decimal.TryParse(Console.ReadLine(), out complexity);
                         complexity /= code;
 
-                        if (complexity <= symbols.Length && complexity != 0) break;
+                        if (complexity <= symbols.Count && complexity != 0) break;
                     }
 
                     Print($"\nDecrypted\n", ConsoleColor.DarkBlue);
@@ -90,20 +91,20 @@ namespace CaesarShiftCipher
 
             for (int i = 0; i < userInput.Length; i++)
             {
-                for (int j = 0; j < symbols.Length; j++)
+                for (int j = 0; j < symbols.Count; j++)
                 {
                     if (userInput[i] == symbols[j])
                     {
                         //encoding
                         if (encode) index = j + (int)complexity;
                         //decoding
-                        else index = j + (symbols.Length - (int)complexity);
+                        else index = j + (symbols.Count - (int)complexity);
                     }
                 }
 
-                if (index >= symbols.Length)
+                if (index >= symbols.Count)
                 {
-                    index -= symbols.Length;
+                    index -= symbols.Count;
                     userInput[i] = symbols[index];
                 }
 
@@ -113,9 +114,9 @@ namespace CaesarShiftCipher
             return new string(userInput);
         }
 
-        public static char[] GetSymbolsArray()
+        public static List<char> GetSymbolsArray()
         {
-            char[] symbols = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+            List<char> symbols = new List<char>{ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
                                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
                                'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
@@ -139,5 +140,23 @@ namespace CaesarShiftCipher
             Console.Write(text);
             Console.ForegroundColor = ConsoleColor.Black;
         }
+
+        //public static char[] GetRandomArray()
+        //{
+        //    Random random1 = new Random();
+
+        //    char[] symbols = GetSymbolsArray();
+        //    char[] random = new char[symbols.Length];
+
+        //    for (int i = 0; i < symbols.Length; i++)
+        //    {
+        //        random[i] = symbols[random.Length()];
+        //    }
+
+
+        //15118981403301
+
+        //    return;
+        //}
     }
 }
