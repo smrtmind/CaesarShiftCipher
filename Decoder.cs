@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaesarShiftCipher
 {
@@ -12,6 +9,10 @@ namespace CaesarShiftCipher
         {
             char[] userInput = input.ToCharArray();
             string[] cipherArray = cipher.Split('|');
+
+            if (cipherArray.Length != Source.GetSymbolsLength() + 1)
+                return "incorrect format of entered key";
+
             int[] indexes = new int[cipherArray.Length - 1];
 
             for (int i = 0; i < indexes.Length; i++)

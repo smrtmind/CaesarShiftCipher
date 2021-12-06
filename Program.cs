@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace CaesarShiftCipher
 {
@@ -25,14 +24,14 @@ namespace CaesarShiftCipher
                 string cipher = string.Empty;
 
                 Console.Clear();
-                Print("[1] ENCRYPTOR\t", ConsoleColor.DarkMagenta);
-                Print("[2] DECRYPTOR\t__________\n", ConsoleColor.DarkBlue);
+                Print.Text("[1] ENCRYPTOR\t", ConsoleColor.DarkMagenta);
+                Print.Text("[2] DECRYPTOR\t__________\n", ConsoleColor.DarkBlue);
 
                 int encryptOrDecrypt = 0;
                 while (encryptOrDecrypt != 1 && encryptOrDecrypt != 2)
                 {
-                    Print("| ".PadLeft(33, ' '), ConsoleColor.DarkBlue);
-                    Print("select: ");
+                    Print.Text("| ".PadLeft(33, ' '), ConsoleColor.DarkBlue);
+                    Print.Text("select: ");
                     int.TryParse(Console.ReadLine(), out encryptOrDecrypt);
                 }
                 Console.WriteLine();
@@ -42,16 +41,16 @@ namespace CaesarShiftCipher
                 {
                     while (input.Length == 0)
                     {
-                        Print($"Enter the original text:\n", ConsoleColor.DarkMagenta);
+                        Print.Text($"Enter the original text:\n", ConsoleColor.DarkMagenta);
                         input = Console.ReadLine();
                     }
 
                     complexity = random.Next(1, symbolsLength);
-                    Print($"\nEncrypted\n", ConsoleColor.DarkMagenta);
-                    Print($"{Encoder.Use(complexity, input)}\n\n");
-                    Print($"KEY: ", ConsoleColor.DarkMagenta);
+                    Print.Text($"\nEncrypted\n", ConsoleColor.DarkMagenta);
+                    Print.Text($"{Encoder.Use(complexity, input)}\n\n");
+                    Print.Text($"KEY: ", ConsoleColor.DarkMagenta);
                     //generating key, to decode your message
-                    Print($"{Source.GetIndexes()}|{complexity * code}\n\n");
+                    Print.Text($"{Source.GetIndexes()}|{complexity * code}\n\n");
                 }
 
                 //else decrypt
@@ -59,34 +58,27 @@ namespace CaesarShiftCipher
                 {
                     while (input.Length == 0)
                     {
-                        Print($"Enter the encrypted text:\n", ConsoleColor.DarkBlue);
+                        Print.Text($"Enter the encrypted text:\n", ConsoleColor.DarkBlue);
                         input = Console.ReadLine();
                     }
 
                     while (cipher.Length == 0)
                     {
-                        Print($"\nKEY: ", ConsoleColor.DarkBlue);
+                        Print.Text($"\nKEY: ", ConsoleColor.DarkBlue);
                         cipher = Console.ReadLine();
                     }
                     
-                    Print($"\nDecrypted\n", ConsoleColor.DarkBlue);
-                    Print($"{Decoder.Use(cipher, code, input)}\n\n");
+                    Print.Text($"\nDecrypted\n", ConsoleColor.DarkBlue);
+                    Print.Text($"{Decoder.Use(cipher, code, input)}\n\n");
                 }
 
                 exitTheProgram = string.Empty;
                 while (exitTheProgram != "n" && exitTheProgram != "y")
                 {
-                    Print("Exit the program? [y] / [n]: ", ConsoleColor.DarkGray);
+                    Print.Text("Exit the program? [y] / [n]: ", ConsoleColor.DarkGray);
                     exitTheProgram = Console.ReadLine().ToLower();
                 }
             }
-        }
-
-        public static void Print(string text, ConsoleColor color = ConsoleColor.Black)
-        {
-            Console.ForegroundColor = color;
-            Console.Write(text);
-            Console.ForegroundColor = ConsoleColor.Black;
         }
     }
 }
