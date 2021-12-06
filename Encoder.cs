@@ -4,6 +4,8 @@ namespace CaesarShiftCipher
 {
     public class Encoder
     {
+        private static int symbolsLength = Source.GetSymbolsLength();
+
         public static string Use(int complexity, string input)
         {
             char[] userInput = input.ToCharArray();
@@ -12,15 +14,15 @@ namespace CaesarShiftCipher
 
             for (int i = 0; i < userInput.Length; i++)
             {
-                for (int j = 0; j < Source.GetSymbolsLength(); j++)
+                for (int j = 0; j < symbolsLength; j++)
                 {
                     if (userInput[i] == randomSymbols[j])
                         index = j + complexity;
                 }
 
-                if (index >= Source.GetSymbolsLength())
+                if (index >= symbolsLength)
                 {
-                    index -= Source.GetSymbolsLength();
+                    index -= symbolsLength;
                     userInput[i] = randomSymbols[index];
                 }
 

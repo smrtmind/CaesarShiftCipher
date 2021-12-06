@@ -5,7 +5,6 @@ namespace CaesarShiftCipher
     class Program
     {
         static Random random = new Random();
-        static int symbolsLength = Source.GetSymbolsLength();
 
         static void Main(string[] args)
         {
@@ -45,7 +44,7 @@ namespace CaesarShiftCipher
                         input = Console.ReadLine();
                     }
 
-                    complexity = random.Next(1, symbolsLength);
+                    complexity = random.Next(1, Source.GetSymbolsLength());
                     Print.Text($"\nEncrypted\n", ConsoleColor.DarkMagenta);
                     Print.Text($"{Encoder.Use(complexity, input)}\n\n");
                     Print.Text($"KEY: ", ConsoleColor.DarkMagenta);

@@ -5,12 +5,14 @@ namespace CaesarShiftCipher
 {
     public class Decoder
     {
+        private static int symbolsLength = Source.GetSymbolsLength();
+
         public static string Use(string cipher, decimal code, string input)
         {
             char[] userInput = input.ToCharArray();
             string[] cipherArray = cipher.Split('|');
 
-            if (cipherArray.Length != Source.GetSymbolsLength() + 1)
+            if (cipherArray.Length != symbolsLength + 1)
                 return "incorrect format of entered key";
 
             int[] indexes = new int[cipherArray.Length - 1];
@@ -26,15 +28,15 @@ namespace CaesarShiftCipher
 
             for (int i = 0; i < userInput.Length; i++)
             {
-                for (int j = 0; j < Source.GetSymbolsLength(); j++)
+                for (int j = 0; j < symbolsLength; j++)
                 {
                     if (userInput[i] == randomSymbols[j])
-                        index = j + (Source.GetSymbolsLength() - (int)complexity);
+                        index = j + (symbolsLength - (int)complexity);
                 }
 
-                if (index >= Source.GetSymbolsLength())
+                if (index >= symbolsLength)
                 {
-                    index -= Source.GetSymbolsLength();
+                    index -= symbolsLength;
                     userInput[i] = randomSymbols[index];
                 }
 
