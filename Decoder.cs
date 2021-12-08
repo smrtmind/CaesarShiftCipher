@@ -16,11 +16,8 @@ namespace CaesarShiftCipher
                 return "incorrect format of entered key";
 
             int[] indexes = Source.DecodeIndexes(cipherArray);
-
             decimal complexity = Convert.ToDecimal(cipherArray[cipherArray.Length - 1]) / code; 
-
             List<char> randomSymbols = Source.GetOriginalArray(indexes);
-
             int index = 0;
 
             for (int i = 0; i < userInput.Length; i++)

@@ -49,9 +49,7 @@ namespace CaesarShiftCipher
                     Print.Text($"{Encoder.Use(complexity, input)}\n\n");
                     Print.Text($"KEY:\n", ConsoleColor.DarkMagenta);
                     //generating key, to decode your message
-                    Source.GetIndexes();
-                    Print.Text($"{complexity * code}\n\n");
-                    
+                    Print.Cipher((complexity * code).ToString());
                 }
 
                 //else decrypt

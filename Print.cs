@@ -10,5 +10,13 @@ namespace CaesarShiftCipher
             Console.Write(text);
             Console.ForegroundColor = ConsoleColor.Black;
         }
+
+        public static void Cipher(string complexity)
+        {
+            foreach (var combination in Source.GenerateMask())
+                Console.Write(combination + "~");
+
+            Text($"{complexity}\n\n");
+        }
     }
 }

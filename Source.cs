@@ -32,10 +32,12 @@ namespace CaesarShiftCipher
                 '1', '0', '3', '2', '5', '4', '7', '6', '9', '8'
             };
 
+            InitializeMasks();
+
             return symbols;
         }
 
-        public static void GetMasks()
+        public static void InitializeMasks()
         {
             masks = new Dictionary<int, string>()
             {
@@ -200,13 +202,12 @@ namespace CaesarShiftCipher
                 { 158, "S=" },
                 { 159, "=X" },
                 { 160, "E+" },
-                { 161, "+D" }        
-            };           
-        }                
-                         
-        public static void GenerateMask()
-        {                
-            GetMasks();
+                { 161, "+D" }
+            };
+        }
+
+        public static string[] GenerateMask()
+        {
             mask = new string[GetSymbolsLength()];
 
             for (int i = 0; i < indexes.Count; i++)
@@ -214,11 +215,11 @@ namespace CaesarShiftCipher
                 foreach (var item in masks)
                 {
                     if (indexes[i] == item.Key)
-                    {
                         mask[i] = item.Value;
-                    }
                 }
             }
+
+            return mask;
         }
 
         public static int GetSymbolsLength() => GetSymbolsArray().Count;
@@ -248,17 +249,8 @@ namespace CaesarShiftCipher
             return randomSymbols;
         }
 
-        public static void GetIndexes()
-        {
-            GenerateMask();
-
-            foreach (var item in mask)
-                Console.Write(item + "~");
-        }
-
         public static int[] DecodeIndexes(string[] cipherArray)
         {
-            GetMasks();
             int[] result = new int[GetSymbolsLength()];
 
             for (int i = 0; i < cipherArray.Length; i++)
