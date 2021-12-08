@@ -7,11 +7,11 @@ namespace CaesarShiftCipher
     public class Source
     {
         private static Random random = new Random();
-        public static Dictionary<int, string> masks;
-        public static List<int> indexes;
-        public static string[] mask;
+        private static Dictionary<int, string> masks;
+        private static List<int> indexes;
+        private static string[] mask;
 
-        public static List<char> GetSymbolsArray()
+        private static List<char> GetSymbolsArray()
         {
             List<char> symbols = new List<char>
             {
@@ -37,7 +37,7 @@ namespace CaesarShiftCipher
             return symbols;
         }
 
-        public static void InitializeMasks()
+        private static void InitializeMasks()
         {
             masks = new Dictionary<int, string>()
             {
@@ -249,24 +249,6 @@ namespace CaesarShiftCipher
             return randomSymbols;
         }
 
-        public static int[] DecodeIndexes(string[] cipherArray)
-        {
-            int[] result = new int[GetSymbolsLength()];
-
-            for (int i = 0; i < cipherArray.Length; i++)
-            {
-                foreach (var item in masks)
-                {
-                    if (cipherArray[i] == item.Value)
-                    {
-                        result[i] = item.Key;
-                    }
-                }
-            }
-
-            return result;
-        }
-
         public static List<char> GetOriginalArray(int[] indexes)
         {
             List<char> symbols = GetSymbolsArray();
@@ -276,6 +258,22 @@ namespace CaesarShiftCipher
                 randomSymbols.Add(symbols[indexes[i]]);
 
             return randomSymbols;
+        }
+
+        public static int[] DecodeIndexes(string[] cipherArray)
+        {
+            int[] result = new int[GetSymbolsLength()];
+
+            for (int i = 0; i < cipherArray.Length; i++)
+            {
+                foreach (var item in masks)
+                {
+                    if (cipherArray[i] == item.Value)
+                        result[i] = item.Key;
+                }
+            }
+
+            return result;
         }
     }
 }

@@ -63,7 +63,7 @@ namespace CaesarShiftCipher
 
                     while (cipher.Length == 0)
                     {
-                        Print.Text($"\nKEY: ", ConsoleColor.DarkBlue);
+                        Print.Text($"\nKEY:\n", ConsoleColor.DarkBlue);
                         cipher = Console.ReadLine();
                     }
                     
