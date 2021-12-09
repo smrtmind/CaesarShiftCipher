@@ -53,6 +53,20 @@ namespace CaesarShiftCipher
                     Print.Text($"{encryptedText}\n\n");
                     Print.Text($"KEY:\n", ConsoleColor.DarkMagenta);
                     Print.Text($"{encryptedCipher}\n\n");
+
+                    do
+                    {
+                        Print.Text("Save result to file? [y] / [n]: ", ConsoleColor.DarkGray);
+                        input = Console.ReadLine().ToLower();
+
+                        if (input == "y")
+                        {
+                            Print.Text($"file with result was created on your desktop\n", ConsoleColor.DarkGreen);
+                            File.WriteAllText(@"C:\Users\[name_of_the_user]\Desktop\encrypted.txt", $"Text:\n{encryptedText}\n\nKEY:\n{encryptedCipher}");
+                        }
+                    }
+                    while (input != "y" && input != "n");
+                    Print.Text("\n");
                 }
 
                 //else decrypt
