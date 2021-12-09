@@ -6,10 +6,10 @@ namespace CaesarShiftCipher
     {
         private static int symbolsLength = Source.GetSymbolsLength();
 
-        public static string Use(int complexity, string input)
+        public static string Use(int key, string input)
         {
             char[] userInput = input.ToCharArray();
-            List<char> randomSymbols = Source.GetRandomArray();
+            List<char> randomSymbols = Source.GetRandomArray(key);
             int index = 0;
 
             for (int i = 0; i < userInput.Length; i++)
@@ -17,7 +17,7 @@ namespace CaesarShiftCipher
                 for (int j = 0; j < symbolsLength; j++)
                 {
                     if (userInput[i] == randomSymbols[j])
-                        index = j + complexity;
+                        index = j + key;
                 }
 
                 if (index >= symbolsLength)
