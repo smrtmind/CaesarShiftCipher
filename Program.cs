@@ -1,10 +1,14 @@
 ﻿using System;
+using System.IO;
 
 namespace CaesarShiftCipher
 {
     class Program
     {
         static Random random = new Random();
+        private static string encryptedText = string.Empty;
+        private static string encryptedCipher = string.Empty;
+        private static string decryptedText = string.Empty;
 
         static void Main(string[] args)
         {
@@ -40,12 +44,15 @@ namespace CaesarShiftCipher
                         input = Console.ReadLine();
                     }
 
+                    //generating key, to encode your message
                     int key = random.Next(1, Source.GetSymbolsLength());
+                    encryptedText = Encoder.Use(key, input);
+                    encryptedCipher = Source.GetCipher();
+
                     Print.Text($"\nEncrypted\n", ConsoleColor.DarkMagenta);
-                    Print.Text($"{Encoder.Use(key, input)}\n\n");
+                    Print.Text($"{encryptedText}\n\n");
                     Print.Text($"KEY:\n", ConsoleColor.DarkMagenta);
-                    //generating key, to decode your message
-                    Source.GetCipher();
+                    Print.Text($"{encryptedCipher}\n\n");
                 }
 
                 //else decrypt
@@ -62,9 +69,11 @@ namespace CaesarShiftCipher
                         Print.Text($"\nKEY:\n", ConsoleColor.DarkBlue);
                         cipher = Console.ReadLine();
                     }
-                    
+
+                    decryptedText = Decoder.Use(cipher, input);
+
                     Print.Text($"\nDecrypted\n", ConsoleColor.DarkBlue);
-                    Print.Text($"{Decoder.Use(cipher, input)}\n\n");
+                    Print.Text($"{decryptedText}\n\n");
                 }
 
                 exitTheProgram = string.Empty;

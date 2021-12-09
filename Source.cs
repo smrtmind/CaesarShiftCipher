@@ -278,14 +278,6 @@ namespace CaesarShiftCipher
             return indexArray;
         }
 
-        public static void GetCipher()
-        {
-            string[] cipher = GenerateCipher();
-
-            for (int i = 0; i < cipher.Length - 1; i++)
-                Print.Text($"{cipher[i]}*");
-
-            Print.Text($"{cipher[cipher.Length - 1]}\n\n");
-        }
+        public static string GetCipher() => string.Join("*", GenerateCipher());
     }
 }
