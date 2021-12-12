@@ -9,13 +9,13 @@ namespace CaesarShiftCipher
 
         public static string Use(string cipher, string input)
         {
+            List<string> cipherList = SplitString(cipher);
             char[] userInput = input.ToCharArray();
-            string[] cipherArray = cipher.Split('*');
 
-            if (cipherArray.Length != symbolsLength + 1)
+            if (cipherList.Count != symbolsLength + 1)
                 return "incorrect format of entered key";
 
-            int[] indexes = Source.DecodeIndexes(cipherArray);
+            int[] indexes = Source.DecodeIndexes(cipherList);
             int key = indexes[indexes.Length - 1]; 
             List<char> randomSymbols = Source.GetOriginalArray(indexes);
             int index = 0;
@@ -38,6 +38,16 @@ namespace CaesarShiftCipher
             }
 
             return new string(userInput);
+        }
+
+        private static List<string> SplitString(string cipher)
+        {
+            List<string> cipherList = new List<string>();
+
+            for (int i = 0; i < cipher.Length - 1; i += 2)
+                cipherList.Add(cipher.Substring(i, 2));
+
+            return cipherList;
         }
     }
 }

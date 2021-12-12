@@ -20,6 +20,8 @@ namespace CaesarShiftCipher
 
             while (exitTheProgram != "y")
             {
+                Source.InitializeResources();
+
                 string input = string.Empty;
                 string cipher = string.Empty;
 
@@ -47,7 +49,7 @@ namespace CaesarShiftCipher
                     //generating key, to encode your message
                     int key = random.Next(1, Source.GetSymbolsLength());
                     encryptedText = Encoder.Use(key, input);
-                    encryptedCipher = Source.GetCipher();
+                    encryptedCipher = Source.GenerateCipher();
 
                     Print.Text($"\nEncrypted\n", ConsoleColor.DarkMagenta);
                     Print.Text($"{encryptedText}\n\n");
