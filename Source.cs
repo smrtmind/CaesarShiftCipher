@@ -251,7 +251,7 @@ namespace CaesarShiftCipher
             return indexArray;
         }
 
-        public static string GenerateCipher()
+        public static string GetCipher()
         {
             string[] cipher = new string[indexes.Count];
 

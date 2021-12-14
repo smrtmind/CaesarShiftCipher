@@ -5,9 +5,9 @@ namespace CaesarShiftCipher
 {
     class Program
     {
-        static Random random = new Random();
-        private static string encryptedText = string.Empty;
+        private static Random random = new Random();
         private static string encryptedCipher = string.Empty;
+        private static string encryptedText = string.Empty;
         private static string decryptedText = string.Empty;
 
         static void Main(string[] args)
@@ -25,7 +25,7 @@ namespace CaesarShiftCipher
                 string input = string.Empty;
                 string cipher = string.Empty;
 
-                int encryptOrDecrypt = 0;
+                int encryptOrDecrypt = default;
                 while (encryptOrDecrypt != 1 && encryptOrDecrypt != 2)
                 {
                     Console.Clear();
@@ -35,7 +35,7 @@ namespace CaesarShiftCipher
                     Print.Text("select: ");
                     int.TryParse(Console.ReadLine(), out encryptOrDecrypt);
                 }
-                Console.WriteLine();
+                Print.Text("\n");
 
                 //if you want to encrypt
                 if (encryptOrDecrypt == 1)
@@ -49,7 +49,7 @@ namespace CaesarShiftCipher
                     //generating key, to encode your message
                     int key = random.Next(1, Source.GetSymbolsLength());
                     encryptedText = Encoder.Use(key, input);
-                    encryptedCipher = Source.GenerateCipher();
+                    encryptedCipher = Source.GetCipher();
 
                     Print.Text($"\nEncrypted\n", ConsoleColor.DarkMagenta);
                     Print.Text($"{encryptedText}\n\n");
@@ -64,7 +64,9 @@ namespace CaesarShiftCipher
                         if (input == "y")
                         {
                             Print.Text($"file with result was created on your desktop\n", ConsoleColor.DarkGreen);
-                            File.WriteAllText(@"C:\Users\[name_of_the_user]\Desktop\encrypted.txt", $"Text:\n{encryptedText}\n\nKEY:\n{encryptedCipher}");
+                            File.WriteAllText(@"C:\Users\[user's name]\Desktop\encrypted.txt", 
+                                              $"Text:\n{encryptedText}\n\n" +
+                                              $"KEY:\n{encryptedCipher}");
                         }
                     }
                     while (input != "y" && input != "n");
@@ -92,12 +94,12 @@ namespace CaesarShiftCipher
                     Print.Text($"{decryptedText}\n\n");
                 }
 
-                exitTheProgram = string.Empty;
-                while (exitTheProgram != "n" && exitTheProgram != "y")
+                do
                 {
                     Print.Text("Exit the program? [y] / [n]: ", ConsoleColor.DarkGray);
                     exitTheProgram = Console.ReadLine().ToLower();
                 }
+                while (exitTheProgram != "n" && exitTheProgram != "y");
             }
         }
     }
